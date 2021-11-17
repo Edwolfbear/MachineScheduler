@@ -66,30 +66,20 @@ class Scheduler {
    */
   addTask(taskname, product) {
     let task = document.createElement("div");
+    task.classList.add("task");
+
     if(taskname == "Maintenance") {
       task.appendChild(document.createTextNode(taskname));
-      task.style = `
-        float: left;
-        text-align: center;
-        background-color: GRAY;
-        width: ${this.maintenanceTime*2.5}px
-      `;
+      task.classList.add("maintenance");
+      task.style = ` width: ${this.maintenanceTime*2.5}px`;
     } else if(taskname == "Preparing") {
       task.appendChild(document.createTextNode("Preparing"));
-      task.style = `
-        float: left;
-        text-align: center;
-        background-color: BLUE;
-        width: ${this.preparationTimes[product[0]][product[1]]*2.5}px;
-      `;
+      task.classList.add("preparing");
+      task.style = `width: ${this.preparationTimes[product[0]][product[1]]*2.5}px;`;
     } else if(taskname == "Processing") {
       task.appendChild(document.createTextNode(taskname+" P"+product));
-      task.style = `
-        float: left;
-        text-align: center;
-        background-color: RED;
-        width: ${this.processingTimes[product]*2.5}px
-      `;
+      task.classList.add("processing");
+      task.style = `width: ${this.processingTimes[product]*2.5}px`;
     }
 
     document.getElementById("schedule").appendChild(task);
