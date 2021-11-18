@@ -14,11 +14,28 @@ class Scheduler {
     this.preparationTimes;
 
     this.productsProcessed = [0];
+    this.timesBetweenMaintenance = [];
 
     this.getNMT();
     this.getP();
     this.getS();
     this.solve();
+
+    this.totalTime =
+      this.maintenanceTime*(this.timesBetweenMaintenance.length-1)
+    + this.timesBetweenMaintenance.reduce((pv, cv) => pv + cv, 0);
+
+    this.wastedTime = (() => {
+      let s = 0;
+
+      for(let time of this.timesBetweenMaintenance.slice(
+        0, this.timesBetweenMaintenance.length-1
+      )) {
+        s += this.timeForMaintenance-time;
+      }
+
+      return s;
+    })();
   }
 
   /** parse n, M and T from instance file */
@@ -132,15 +149,17 @@ class Scheduler {
         } else { biggers += 1; }
 
         // if there isn't a procees that fit on remaining time starts de maintenance
-        if(biggers == indexTimes.length) { console.log(time);
+        if(biggers == indexTimes.length) {
+          this.timesBetweenMaintenance.push(time);
           time = 0; biggers = 0; this.addTask("Maintenance");
         }
       }
-    }
+    } this.timesBetweenMaintenance.push(time);
   }
 }
 
 // DROP FILE AND START ALGORITHM
+var scheduler;
 var dropZone = document.getElementById('drop_zone');
 
 dropZone.addEventListener('drop', (event) => {
@@ -153,7 +172,12 @@ dropZone.addEventListener('drop', (event) => {
       let reader = new FileReader();
       reader.readAsText(files[0]);
       reader.onload = (event) => {
-        let result = new Scheduler(reader.result);
+        scheduler = new Scheduler(reader.result);
+        document.getElementById("instance-name").innerHTML = files[0].name;
+        document.getElementById("products-quantity").innerHTML = scheduler.productsLength;
+        document.getElementById("maintenance-time").innerHTML = scheduler.maintenanceTime;
+        document.getElementById("wasted-time").innerHTML = scheduler.wastedTime;
+        document.getElementById("total-time").innerHTML = scheduler.totalTime;
       };
     } else { throw "Solo puedes subir un archivo."; }
   } catch(err) {

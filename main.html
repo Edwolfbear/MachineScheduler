@@ -2,7 +2,7 @@
 <html lang="es" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>PIATSO</title>
+    <title>Machine Scheduler</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
   </head>
@@ -14,7 +14,33 @@
       <div id="schedule"></div>
     </main>
     <footer>
-      <div id="drop_zone">Drop files here</div>
+      <div id="drop_zone">Drop file here</div>
+      <div class="data">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <ul class="list-unstyled" style="font-weight: bold">
+                <li class="mb2">
+                  Instance Name: <span id="instance-name"></span>
+                </li>
+                <li class="mb2">
+                  Products Quantity: <span id="products-quantity"></span>
+                </li>
+                <li class="mb2">
+                  Maintenance Time: <span id="maintenance-time"></span>
+                </li>
+                <li class="mb2">&nbsp</li>
+                <li class="mb2">
+                  Wasted Time: <span id="wasted-time"></span>
+                </li>
+                <li class="mb2">
+                  Makespan: <span id="total-time"></span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
     </footer>
     <script src="js/ui.js" charset="utf-8"></script>
     <script src="js/main.js" charset="utf-8"></script>

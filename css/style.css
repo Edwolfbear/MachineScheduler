@@ -77,12 +77,23 @@ footer {
 }
 
 #drop_zone {
-    font-size: 1.25em;
-    padding-top: 6%;
-    text-align: center;
-    width: 33%;
-    height: 90%;
-    background-color: #fdfdfd;
-    margin: 1%;
-    box-shadow: #d5d5d5 0px 0px 4px 1px;
+  position: absolute;
+  font-size: 1.25em;
+  padding-top: 6%;
+  text-align: center;
+  width: 33%;
+  height: 90%;
+  background-color: #fdfdfd;
+  margin: 1%;
+  box-shadow: #d5d5d5 0px 0px 4px 1px;
 }
+
+.data {
+  position: absolute;
+  top: 5%;
+  left: 35%;
+  width: 65%;
+  height: 95%;
+}
+
+span { font-weight: normal; }
